@@ -1,103 +1,102 @@
-import Image from "next/image";
+"use client";
+import { useState } from "react";
+import PostCard from "../components/PostCard";
+
+const demoPosts = [
+  {
+    id: 1,
+    title: "Stories of Grace and Kindness",
+    body: "This blog shares unique stories in English, offering inspiration and insight for all readers.",
+  },
+  {
+    id: 2,
+    title: "Life Lessons",
+    body: "Find practical life lessons here. Everyone can benefit from these helpful tips and advice.",
+  },
+  {
+    id: 3,
+    title: "Secrets of Success",
+    body: "Discover the secrets to achieving success, especially useful for young people and professionals.",
+  },
+  {
+    id: 4,
+    title: "Love Stories",
+    body: "Read touching love stories in English. Explore different experiences and perspectives.",
+  },
+  {
+    id: 5,
+    title: "Family Matters",
+    body: "Explore family challenges and solutions. Practical advice for building strong family relationships.",
+  },
+  {
+    id: 6,
+    title: "Workplace Wisdom",
+    body: "Get useful tips for your career and workplace. Enhance your professional skills and knowledge.",
+  },
+  {
+    id: 7,
+    title: "Spiritual Reflections",
+    body: "Find stories and reflections for those seeking spiritual growth and encouragement.",
+  },
+  {
+    id: 8,
+    title: "Education Insights",
+    body: "Discover stories and advice related to education and learning for all ages.",
+  },
+  {
+    id: 9,
+    title: "Health & Wellness",
+    body: "Access helpful health information and wellness tips for everyone.",
+  },
+  {
+    id: 10,
+    title: "Life Stories",
+    body: "Read inspiring life stories and experiences that offer valuable lessons for all.",
+  },
+];
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [search, setSearch] = useState("");
+  const filteredPosts = demoPosts.filter(
+    (post) =>
+      post.title.toLowerCase().includes(search.toLowerCase()) ||
+      post.body.toLowerCase().includes(search.toLowerCase())
+  );
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <main className="min-h-screen bg-background text-foreground flex flex-col items-center px-4 sm:px-8">
+      {/* Hero Section */}
+      <section className="w-full max-w-4xl text-center py-16">
+        <h1 className="text-5xl sm:text-7xl font-extrabold mb-6 bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">
+          Unique Blog Stories
+        </h1>
+        <p className="text-xl sm:text-2xl text-gray-700 dark:text-gray-200 mb-8 leading-relaxed">
+          This blog app is built in English and offers valuable content on a variety of topics for everyone.
+        </p>
+        <div className="flex justify-center">
+          <input
+            type="text"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            placeholder="Search posts..."
+            className="w-full max-w-md px-6 py-3 rounded-xl border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-400 text-lg sm:text-xl shadow transition-all"
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+      {/* Post Grid */}
+      <section className="w-full max-w-7xl mx-auto pb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          {filteredPosts.length > 0 ? (
+            filteredPosts.map((post) => (
+              <PostCard key={post.id} id={post.id} title={post.title} body={post.body} />
+            ))
+          ) : (
+            <div className="col-span-full text-center text-gray-400 text-xl py-20">No posts found.</div>
+          )}
+        </div>
+      </section>
+    </main>
   );
 }
+
+// NOTE: This project uses the Next.js App Router (src/app), not the Pages Router (src/pages). For dynamic routes, create a folder 'app/posts/[id]/page.tsx' and use the App Router's data fetching methods.
